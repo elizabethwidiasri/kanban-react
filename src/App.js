@@ -15,7 +15,7 @@ function App() {
 
   const update = (id, progress) => {
     const idx = todos.findIndex(todo => todo.id === id)
-    const updated = Object.assign(todos[id],  {progress})
+    const updated = Object.assign({}, todos[idx],  {progress})
     setTodos([...todos.slice(0, idx), updated, ...todos.slice(idx + 1)])
   }
 
