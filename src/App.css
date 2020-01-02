@@ -4,6 +4,11 @@
   justify-content: space-evenly;
 }
 
+.direction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 .App {
   text-align: center;

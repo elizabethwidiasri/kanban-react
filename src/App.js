@@ -13,8 +13,14 @@ function App() {
   // const [boards, setBoards] = useState([{status: 'todo', tasks: []}, {status: 'doing', tasks: []}, {status: 'done', tasks: []}])
 
 
+  const update = (id, progress) => {
+    const idx = todos.findIndex(todo => todo.id === id)
+    const updated = Object.assign(todos[id],  {progress})
+    setTodos([...todos.slice(0, idx), updated, ...todos.slice(idx + 1)])
+  }
+
   const remove = (id) => {
-    // const idx = todos.findIndex(todo => todo.title === title)
+    // const idx = todos.findIndex(todo => todo.id === id)
     // if (idx > -1 ) {
     //   setTodos(todos.splice(idx, 1))
     // }
@@ -44,7 +50,7 @@ function App() {
       <div className="row">
         <div className="column">
             {status.map((stat, i) => (
-              <Board key={'stat' + i} stat={stat} remove={remove} todos={todos.filter(todo => todo.progress === stat)} />
+              <Board key={'stat' + i} stat={stat} remove={remove} update={update} todos={todos.filter(todo => todo.progress === stat)} />
           ))}
         </div>
       </div>
