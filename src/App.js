@@ -1,72 +1,41 @@
 import React, {useState} from 'react';
-// import Navbar from './components/Navbar'
-// import Form from './components/Form'
-// import Board from './components/Board'
+import Navbar from './components/Navbar'
+import Form from './components/Form'
+import Board from './components/Board'
 import './App.css';
 
 function App() {
   
   const [todos, setTodos] = useState([])
   const [todo, setTodo] = useState('')
-  // const [status, setStatus] = useState(['todo', 'doing', 'done'])
+  const [status, setStatus] = useState(['todo', 'doing', 'done'])
   // const [boards, setBoards] = useState([{status: 'todo', tasks: []}, {status: 'doing', tasks: []}, {status: 'done', tasks: []}])
 
 
   const appendTodo = (e) => {
     e.preventDefault()
-    setTodos([...todos, todo])
+    setTodos([...todos, {title: todo, progress : 'todo'}])
     setTodo('')
   }
 
   return (
     <div className="App">
-      {/* <Navbar />
-      <Form />
-      <Board /> */}
 
       <>
-      <h1>React Kanban</h1>
+      <Navbar />
       <br></br>
       </>
 
       <>
-      {/* <Form appendTodo={appendTodo} todo={todo} setTodo={setTodo} /> */}
-      {/* {todos} */}
-      <form onSubmit={appendTodo}>
-        <input type="text" value={todo} onChange={e => setTodo(e.target.value)}></input>
-        <input type="submit" value="add todo"></input>
-      </form>
+      <Form appendTodo={appendTodo} todo={todo} setTodo={setTodo} />
       </>
 
       <>
       <div className="row">
         <div className="column">
-
-            {/* {status.map(stat => (
-             <div className="card">
-                <p>{stat}</p>
-                {todos.map(todo => (
-                  <p>{todo}</p>
-                ))}
-             </div>
-          ))} */}
-
-        
-          <div className="card">
-              <p>todo</p>
-              {todos.map(todo => (
-                <p>{todo}</p>
-            ))}
-          </div>
-
-          <div className="card">
-              <p>doing</p>
-          </div>
-
-          <div className="card">
-              <p>done</p>
-          </div>
-
+            {status.map((stat, i) => (
+              <Board key={'stat' + i} stat={stat} todos={todos.filter(todo => todo.progress === stat)} />
+          ))}
         </div>
       </div>
       </>

@@ -1,9 +1,14 @@
 import React from 'react'
 
-function Boards() {
+function Boards({stat, todos}) {
   return (
     <>
-    <p>ini board</p>
+     <div className="card">
+        <p>{stat}</p>
+        {todos.map((todo, i) => (
+          <p key={'todo' + i}>{todo.title}</p>
+        ))}
+      </div>
     </>
   )
 }
